@@ -1,0 +1,12 @@
+# Ignorar o diretório freela
+freela/
+
+# Outros arquivos que podem ser ignorados
+.DS_Store
+node_modules/
+*.log
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
