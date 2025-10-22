@@ -66,9 +66,10 @@ export class JobsController {
     description: 'Lista de trabalhos retornada com sucesso',
     type: [JobResponseDto],
   })
-  findAllExcludingUser(@Request() req) {
-    return this.jobsService.findAllExcludingUser(req.user.userId);
+ findAll(@Request() req) {
+    return this.jobsService.findAll();
   }
+
 
   @Get('search')
   @ApiOperation({ 
