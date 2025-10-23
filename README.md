@@ -19,4 +19,6 @@ NODE_ENV=development
 
 **Link para expo versão 51**
 https://expo.dev/go?sdkVersion=51&platform=android&device=true
-<img width="269" height="267" alt="image" src="https://github.com/user-attachments/assets/f8212aa7-0082-42cf-a661-145c370340b2" />
+
+
+<img width="100" height="100" alt="image" src="https://github.com/user-attachments/assets/f8212aa7-0082-42cf-a661-145c370340b2" />
