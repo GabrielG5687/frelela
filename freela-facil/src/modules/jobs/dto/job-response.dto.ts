@@ -21,10 +21,51 @@ export class JobResponseDto {
   valorSugerido: number;
 
   @ApiProperty({
+    description: 'Salário oferecido em reais',
+    example: 5000.00,
+    required: false,
+  })
+  salario?: number;
+
+  @ApiProperty({
     description: 'Descrição detalhada do trabalho',
     example: 'Preciso de um site responsivo para minha empresa de consultoria.',
   })
   descricao: string;
+
+  @ApiProperty({
+    description: 'Categoria do trabalho',
+    example: 'TI',
+    required: false,
+  })
+  categoria?: string;
+
+  @ApiProperty({
+    description: 'Localização do trabalho',
+    example: 'São Paulo',
+    required: false,
+  })
+  localizacao?: string;
+
+  @ApiProperty({
+    description: 'Tipo de contrato',
+    example: 'CLT',
+    required: false,
+  })
+  tipoContrato?: string;
+
+  @ApiProperty({
+    description: 'Nível de experiência requerido',
+    example: 'Pleno',
+    required: false,
+  })
+  experiencia?: string;
+
+  @ApiProperty({
+    description: 'Status do trabalho',
+    example: 'ATIVO',
+  })
+  status: string;
 
   @ApiProperty({
     description: 'Data de publicação do trabalho',

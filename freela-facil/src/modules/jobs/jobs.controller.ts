@@ -24,6 +24,8 @@ import { JobsService } from './jobs.service';
 import { CreateJobDto } from './dto/create-job.dto';
 import { UpdateJobDto } from './dto/update-job.dto';
 import { JobResponseDto } from './dto/job-response.dto';
+import { SearchJobDto } from './dto/search-job.dto';
+import { SearchResultDto } from './dto/search-result.dto';
 import { JwtAuthGuard } from '../../auth/jwt-auth.guard';
 
 @ApiTags('jobs')
@@ -92,6 +94,116 @@ export class JobsController {
       return this.jobsService.findAll();
     }
     return this.jobsService.search(query);
+  }
+
+  @Post('search/advanced')
+  @ApiOperation({ 
+    summary: 'Busca avançada de trabalhos',
+    description: 'Busca trabalhos com múltiplos filtros e paginação'
+  })
+  @ApiBody({ type: SearchJobDto })
+  @ApiResponse({
+    status: HttpStatus.OK,
+    description: 'Resultados da busca avançada retornados com sucesso',
+    type: SearchResultDto,
+  })
+  searchAdvanced(@Body() searchDto: SearchJobDto) {
+    return this.jobsService.searchAdvanced(searchDto);
+  }
+
+  @Get('search/quick')
+  @ApiOperation({ 
+    summary: 'Busca rápida para autocompletar',
+    description: 'Busca rápida para sugestões de autocompletar'
+  })
+  @ApiQuery({
+    name: 'q',
+    description: 'Termo de busca',
+    example: 'dev',
+    required: true,
+  })
+  @ApiQuery({
+    name: 'limit',
+    description: 'Limite de resultados',
+    example: 5,
+    required: false,
+  })
+  @ApiResponse({
+    status: HttpStatus.OK,
+    description: 'Sugestões retornadas com sucesso',
+    type: [JobResponseDto],
+  })
+  quickSearch(
+    @Query('q') query: string,
+    @Query('limit') limit?: number,
+  ) {
+    return this.jobsService.quickSearch(query, limit);
+  }
+
+  @Get('categories/popular')
+  @ApiOperation({ 
+    summary: 'Categorias populares',
+    description: 'Retorna as categorias mais populares'
+  })
+  @ApiQuery({
+    name: 'limit',
+    description: 'Limite de resultados',
+    example: 10,
+    required: false,
+  })
+  @ApiResponse({
+    status: HttpStatus.OK,
+    description: 'Categorias populares retornadas com sucesso',
+  })
+  getPopularCategories(@Query('limit') limit?: number) {
+    return this.jobsService.getPopularCategories(limit);
+  }
+
+  @Get('locations/popular')
+  @ApiOperation({ 
+    summary: 'Localizações populares',
+    description: 'Retorna as localizações mais populares'
+  })
+  @ApiQuery({
+    name: 'limit',
+    description: 'Limite de resultados',
+    example: 10,
+    required: false,
+  })
+  @ApiResponse({
+    status: HttpStatus.OK,
+    description: 'Localizações populares retornadas com sucesso',
+  })
+  getPopularLocations(@Query('limit') limit?: number) {
+    return this.jobsService.getPopularLocations(limit);
+  }
+
+  @Get(':id/similar')
+  @ApiOperation({ 
+    summary: 'Trabalhos similares',
+    description: 'Retorna trabalhos similares baseado em uma vaga específica'
+  })
+  @ApiParam({
+    name: 'id',
+    description: 'ID único do trabalho',
+    example: '123e4567-e89b-12d3-a456-426614174000',
+  })
+  @ApiQuery({
+    name: 'limit',
+    description: 'Limite de resultados',
+    example: 5,
+    required: false,
+  })
+  @ApiResponse({
+    status: HttpStatus.OK,
+    description: 'Trabalhos similares retornados com sucesso',
+    type: [JobResponseDto],
+  })
+  findSimilarJobs(
+    @Param('id') id: string,
+    @Query('limit') limit?: number,
+  ) {
+    return this.jobsService.findSimilarJobs(id, limit);
   }
 
   @UseGuards(JwtAuthGuard)

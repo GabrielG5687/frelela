@@ -12,8 +12,26 @@ export class Job {
   @Column({ type: 'decimal', precision: 10, scale: 2 })
   valorSugerido: number;
 
+  @Column({ type: 'decimal', precision: 10, scale: 2, nullable: true })
+  salario: number;
+
   @Column({ type: 'text' })
   descricao: string;
+
+  @Column({ type: 'varchar', length: 100, nullable: true })
+  categoria: string;
+
+  @Column({ type: 'varchar', length: 100, nullable: true })
+  localizacao: string;
+
+  @Column({ type: 'varchar', length: 50, nullable: true })
+  tipoContrato: string;
+
+  @Column({ type: 'varchar', length: 50, nullable: true })
+  experiencia: string;
+
+  @Column({ type: 'varchar', length: 20, default: 'ATIVO' })
+  status: string;
 
   @CreateDateColumn({ name: 'data_publicacao' })
   dataPublicacao: Date;

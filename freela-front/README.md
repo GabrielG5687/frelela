@@ -83,9 +83,15 @@ npm install
 yarn install
 ```
 
-3. **Configure a URL da API**
-   - Abra o arquivo `src/services/api.ts`
-   - Altere a variável `API_BASE_URL` para o endereço do seu backend NestJS
+3. **Configure as variáveis de ambiente**
+   - Copie o arquivo `.env.example` para `.env`
+   ```bash
+   cp .env.example .env
+   ```
+   - Edite o arquivo `.env` e configure a URL da sua API:
+   ```
+   API_BASE_URL=http://SEU_IP:3000
+   ```
 
 4. **Inicie o projeto**
 ```bash
@@ -106,6 +112,22 @@ expo start
 - `npm run android` - Executa no Android
 - `npm run ios` - Executa no iOS
 - `npm run web` - Executa no navegador (web)
+
+## ⚙️ Variáveis de Ambiente
+
+O projeto utiliza variáveis de ambiente para configuração. Crie um arquivo `.env` na raiz do projeto:
+
+```bash
+# API Configuration
+API_BASE_URL=http://192.168.0.202:3000
+```
+
+### Configuração para diferentes ambientes:
+
+- **Desenvolvimento local**: Use o IP da sua máquina (ex: `http://192.168.0.202:3000`)
+- **Emulador Android**: Use `http://10.0.2.2:3000`
+- **Emulador iOS**: Use `http://localhost:3000`
+- **Produção**: Use a URL do seu servidor (ex: `https://api.freelafacil.com`)
 
 ## 🌐 Backend Integration
 

@@ -54,4 +54,13 @@ export class JobService {
       throw new Error('Erro ao excluir trabalho.');
     }
   }
+
+  static async searchJobs(query: string): Promise<Job[]> {
+    try {
+      const response = await api.get<Job[]>(`/jobs/search?q=${encodeURIComponent(query)}`);
+      return response.data;
+    } catch (error) {
+      throw new Error('Erro ao buscar trabalhos.');
+    }
+  }
 }

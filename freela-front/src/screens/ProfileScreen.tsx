@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { Alert } from 'react-native';
 import styled from 'styled-components/native';
 import { BottomTabNavigationProp } from '@react-navigation/bottom-tabs';
+import { useFocusEffect } from '@react-navigation/native';
 import { TabParamList, User, Job } from '../types';
 import { AuthService } from '../services/auth';
 import { JobService } from '../services/job';
@@ -174,6 +175,13 @@ export const ProfileScreen: React.FC<Props> = ({ navigation }) => {
   useEffect(() => {
     loadUserData();
   }, []);
+
+  // Atualiza os dados quando a tela recebe foco (ex: após criar um trabalho)
+  useFocusEffect(
+    useCallback(() => {
+      loadUserData();
+    }, [])
+  );
 
   const loadUserData = async () => {
     try {
